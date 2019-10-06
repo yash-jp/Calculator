@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        git demo comment
-
+//        TO HIDE THE ACTION BAR ON TOP
+        getSupportActionBar().hide();
     }
 }

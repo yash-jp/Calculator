@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,27 +10,31 @@
     <TextView
         android:id="@+id/tvMainHistory"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="History"
-        android:background="@android:color/darker_gray"
+        android:layout_height="0dp"
+        android:background="@android:color/black"
+        app:layout_constraintVertical_weight="1"
         android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/tvMainCurrent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvMainCurrent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintVertical_weight="2"
+        android:background="@android:color/black"
+        android:gravity="end|center"
         android:text="0"
-        android:textSize="36sp"
-        android:gravity="end"
-        android:background="@android:color/darker_gray"
         android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@+id/tvMainHistory"/>
+        android:textSize="38sp"
+        app:layout_constraintBottom_toTopOf="@+id/llMABtnContainer"
+        app:layout_constraintTop_toBottomOf="@+id/tvMainHistory" />
 
     <LinearLayout
+        android:id="@+id/llMABtnContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-
+        app:layout_constraintVertical_weight="7"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMainCurrent">
@@ -40,126 +43,138 @@
 
             <Button
                 android:id="@+id/btnMainClear"
-                android:text="C"
+                style="@style/style_button"
                 android:background="#D5D5D5"
-                android:textColor="#232323"
-                style="@style/style_button" />
+                android:text="C"
+                android:textColor="#232323" />
 
             <Button
                 android:id="@+id/btnMainPlusMinus"
-                android:text="\u00B1"
+                style="@style/style_button"
                 android:background="#D5D5D5"
-                android:textColor="#232323"
-                style="@style/style_button" />
+                android:text="+/-"
+                android:textColor="#232323" />
+
             <Button
                 android:id="@+id/btnMainPercentage"
-                android:text="%"
+                style="@style/style_button"
                 android:background="#D5D5D5"
-                android:textColor="#232323"
-                style="@style/style_button" />
+                android:text="%"
+                android:textColor="#232323" />
+
             <Button
                 android:id="@+id/btnMainDivision"
-                android:text="\u00f7"
+                style="@style/style_button"
                 android:background="#F69637"
-                android:textColor="#FFF0A9"
-                style="@style/style_button" />
+                android:text="\u00f7"
+                android:textColor="#FFF0A9" />
         </LinearLayout>
 
         <LinearLayout style="@style/style_row">
 
             <Button
                 android:id="@+id/btnMain7"
-                android:text="7"
+                style="@style/style_button"
                 android:background="#424242"
-                style="@style/style_button" />
+                android:text="7" />
 
             <Button
                 android:id="@+id/btnMain8"
-                android:text="8"
+                style="@style/style_button"
                 android:background="#424242"
-                style="@style/style_button" />
+                android:text="8" />
+
             <Button
                 android:id="@+id/btnMain9"
-                android:text="9"
+                style="@style/style_button"
                 android:background="#424242"
-                style="@style/style_button" />
+                android:text="9" />
+
             <Button
                 android:id="@+id/btnMainMultiplication"
-                android:text="\u00d7"
+                style="@style/style_button"
                 android:background="#F69637"
-                android:textColor="#FFF0A9"
-                style="@style/style_button" />
+                android:text="\u00d7"
+                android:textColor="#FFF0A9" />
         </LinearLayout>
 
         <LinearLayout style="@style/style_row">
+
             <Button
                 android:id="@+id/btnMain4"
-                android:text="4"
+                style="@style/style_button"
                 android:background="#424242"
-                style="@style/style_button" />
+                android:text="4" />
 
             <Button
                 android:id="@+id/btnMain5"
-                android:text="5"
+                style="@style/style_button"
                 android:background="#424242"
-                style="@style/style_button" />
+                android:text="5" />
+
             <Button
                 android:id="@+id/btnMain6"
-                android:text="6"
+                style="@style/style_button"
                 android:background="#424242"
-                style="@style/style_button" />
+                android:text="6" />
+
             <Button
                 android:id="@+id/btnMainSubstraction"
-                android:text="-"
+                style="@style/style_button"
                 android:background="#F69637"
-                android:textColor="#FFF0A9"
-                style="@style/style_button" />
+                android:text="-"
+                android:textColor="#FFF0A9" />
         </LinearLayout>
 
         <LinearLayout style="@style/style_row">
+
             <Button
                 android:id="@+id/btnMain1"
-                android:text="1"
+                style="@style/style_button"
                 android:background="#424242"
-                style="@style/style_button" />
+                android:text="1" />
 
             <Button
                 android:id="@+id/btnMain2"
-                android:text="2"
+                style="@style/style_button"
                 android:background="#424242"
-                style="@style/style_button" />
+                android:text="2" />
+
             <Button
                 android:id="@+id/btnMain3"
-                android:text="3"
+                style="@style/style_button"
                 android:background="#424242"
-                style="@style/style_button" />
+                android:text="3" />
+
             <Button
                 android:id="@+id/btnMainPlus"
-                android:text="+"
+                style="@style/style_button"
                 android:background="#F69637"
-                android:textColor="#FFF0A9"
-                style="@style/style_button" />
+                android:text="+"
+                android:textColor="#FFF0A9" />
         </LinearLayout>
+
         <LinearLayout style="@style/style_row">
 
             <Button
                 android:id="@+id/btnMain0"
-                android:text="0"
-                android:background="#424242"
+                style="@style/style_button"
                 android:layout_weight="2"
-                style="@style/style_button" />
+                android:background="#424242"
+                android:text="0" />
 
             <Button
                 android:id="@+id/btnMainDecimal"
-                android:text="."
+                style="@style/style_button"
                 android:background="#424242"
-                style="@style/style_button" />
+                android:text="." />
+
             <Button
                 android:id="@+id/btnMainEqual"
-                android:text="="
+                style="@style/style_button"
                 android:background="#F69637"
-                android:textColor="#FFF0A9"
-                style="@style/style_button" />
+                android:text="="
+                android:textColor="#FFF0A9" />
         </LinearLayout>
 
     </LinearLayout>
