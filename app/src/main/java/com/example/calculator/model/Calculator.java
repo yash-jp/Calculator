@@ -17,13 +17,18 @@ public class Calculator {
     private String current;
 
 //    EXPRESSION VARIABLES
-    boolean isAdd;
-    boolean isSub;
-    boolean isMul;
-    boolean isDiv;
-    boolean isPer;
-//    THIS WILL BE USED TO PERFORM OPERATION WHEN USER CLICKS ON OPERATION
-    boolean isLastExpression;
+    private boolean isAdd;
+    private boolean isSub;
+    private boolean isMul;
+    private boolean isDiv;
+    private boolean isPer;
+
+    private boolean isOperation;
+////    THIS WILL BE USED TO PERFORM OPERATION WHEN USER CLICKS ON OPERATION
+//    boolean isLastExpression;
+
+//    THIS WILL WORK AS A STACK
+    private char stack=0;
 
     public void buttonClicked(String clickValue) {
 
@@ -41,6 +46,8 @@ public class Calculator {
                 Log.d(TAG,"AC clicked");
                 this.currentNumber=0;
                 this.oldNumber=0;
+                this.isOperation=false;
+                this.stack=0;
                 break;
             }
 
@@ -73,6 +80,8 @@ public class Calculator {
                 isMul=false;
                 isDiv=true;
                 isPer=false;
+
+//                stack='/';
 //                STORE CURRENTNUMBER IN OLD AND CLEAR CURRENTNUMBER
                 saveCurrentInOld();
 
@@ -88,6 +97,8 @@ public class Calculator {
                 isMul=true;
                 isDiv=false;
                 isPer=false;
+
+//                stack='*';
 //                STORE CURRENTNUMBER IN OLD AND CLEAR CURRENTNUMBER
                 saveCurrentInOld();
 
@@ -103,6 +114,8 @@ public class Calculator {
                 isDiv=false;
                 isPer=false;
 
+//                stack='+';
+
 //                STORE CURRENTNUMBER IN OLD AND CLEAR CURRENTNUMBER
                 saveCurrentInOld();
                 break;
@@ -116,6 +129,8 @@ public class Calculator {
                 isMul=false;
                 isDiv=false;
                 isPer=false;
+
+//                stack='-';
 //                STORE CURRENTNUMBER IN OLD AND CLEAR CURRENTNUMBER
                 saveCurrentInOld();
                 break;
@@ -144,18 +159,98 @@ public class Calculator {
             this.currentNumber=this.oldNumber*this.currentNumber;
         }
         if(isDiv){
-            this.currentNumber=this.oldNumber/this.currentNumber;
+//            check for NAN and 0 divisor
+            if(this.currentNumber!=0||this.currentNumber!=0.0){
+                this.currentNumber=this.oldNumber/this.currentNumber;
+            }else{
+                this.currentNumber=0;
+            }
+
         }
         if(isPer){
             this.currentNumber=this.oldNumber%this.currentNumber;
         }
         Log.d(TAG,"result - "+String.valueOf(this.currentNumber));
+        this.oldNumber=0;
+//        this.currentNumber=0;
+        this.isOperation=false;
+        this.stack=0;
     }
 
     private void saveCurrentInOld() {
-        this.oldNumber=this.currentNumber;
-//        CLEAR CURRENT NUMBER
-        this.currentNumber=0;
+        if(stack==0){
+//            stack is empty
+            if(isAdd){
+                stack='+';
+                this.oldNumber=this.currentNumber;
+                this.currentNumber=0;
+                this.isOperation=true;
+            }
+            if(isSub){
+                stack='-';
+                this.oldNumber=this.currentNumber;
+                this.currentNumber=0;
+                this.isOperation=true;
+            }
+            if(isMul){
+                stack='*';
+                this.oldNumber=this.currentNumber;
+                this.currentNumber=0;
+                this.isOperation=true;
+            }
+            if(isDiv){
+                stack='/';
+                this.oldNumber=this.currentNumber;
+                this.currentNumber=0;
+                this.isOperation=true;
+            }
+            if(isPer){
+                stack='%';
+                this.oldNumber=this.currentNumber;
+                this.currentNumber=0;
+                this.isOperation=true;
+            }
+
+        }else{
+//            SOME OPERATIONS ARE PENDING AND YOU GOT ANOTHER OPERATION
+            if(stack=='+'){
+                this.oldNumber=this.oldNumber+this.currentNumber;
+                this.currentNumber=0;
+                this.isOperation=true;
+            }else if(stack=='-'){
+                this.oldNumber=this.oldNumber-this.currentNumber;
+                this.currentNumber=0;
+                this.isOperation=true;
+            }else if(stack=='*'){
+                this.oldNumber=this.oldNumber*this.currentNumber;
+                this.currentNumber=0;
+                this.isOperation=true;
+            }else if(stack=='/'){
+                this.oldNumber=this.oldNumber/this.currentNumber;
+                this.currentNumber=0;
+                this.isOperation=true;
+            }else{
+                this.oldNumber=this.oldNumber%this.currentNumber;
+                this.currentNumber=0;
+                this.isOperation=true;
+            }
+
+            if(isAdd){
+                stack='+';
+            }
+            if(isSub){
+                stack='-';
+            }
+            if(isMul){
+                stack='*';
+            }
+            if(isDiv){
+                stack='/';
+            }
+            if(isPer){
+                stack='%';
+            }
+        }
     }
 
     private void performAddOperation() {
@@ -167,10 +262,15 @@ public class Calculator {
         double temp = Double.parseDouble(clickValue);
         temp +=  this.currentNumber * 10;
         this.currentNumber=temp;
+        this.isOperation=false;
         Log.d(TAG,String.valueOf(this.currentNumber));
     }
 
     public String getCurrent(){
-        return String.valueOf(this.currentNumber);
+        if(isOperation){
+            return String.valueOf(this.oldNumber);
+        }else{
+            return String.valueOf(this.currentNumber);
+        }
     }
 }
